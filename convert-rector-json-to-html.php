@@ -126,7 +126,7 @@ arsort($ruleStats);
             </tbody>
         </table>
     <?php endif; ?>
-    
+
     <!-- 文件变更详情 -->
     <h2>文件变更详情</h2>
     <?php foreach ($data['file_diffs'] ?? [] as $item): ?>
