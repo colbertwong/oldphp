@@ -86,6 +86,47 @@ arsort($ruleStats);
         </table>
     <?php endif; ?>
 
+    <!-- 文件规则一览 -->
+    <h2>文件应用规则一览</h2>
+    <?php if (empty($data['file_diffs'])): ?>
+        <p>没有文件变更记录。</p>
+    <?php else: ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>文件</th>
+                    <th>应用的规则</th>
+                    <th>规则数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $i = 1; foreach ($data['file_diffs'] as $item): ?>
+                    <?php
+                    $file = $item['file'] ?? '';
+                    $rules = $item['applied_rectors'] ?? [];
+                    ?>
+                    <tr>
+                        <td><?= $i++ ?></td>
+                        <td class="rule-name"><?= htmlspecialchars($file) ?></td>
+                        <td>
+                            <?php if (empty($rules)): ?>
+                                <span style="color:#999;">（无规则记录）</span>
+                            <?php else: ?>
+                                <ul style="margin:0;padding-left:1.2em;">
+                                    <?php foreach ($rules as $r): ?>
+                                        <li class="rule-name"><?= htmlspecialchars($r) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </td>
+                        <td class="count"><?= count($rules) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+    
     <!-- 文件变更详情 -->
     <h2>文件变更详情</h2>
     <?php foreach ($data['file_diffs'] ?? [] as $item): ?>
